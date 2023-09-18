@@ -12,7 +12,7 @@ export default authMiddleware({
       return NextResponse.rewrite(url);
     }
   },
-  publicRoutes: ["/api/webhooks"],
+  ignoredRoutes: ["/api/webhooks"],
 });
 
 export const config = {

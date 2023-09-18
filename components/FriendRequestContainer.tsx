@@ -18,11 +18,10 @@ interface IFriendRequest {
     username: string;
     email: string;
     imageUrl?: string;
-  };
+  } | null;
 }
 
 const FriendRequestContainer = ({ data }: { data: IFriendRequest[] }) => {
-  const [email, setEmail] = useState("");
   const [friendRequestsData, setFriendRequestsData] =
     useState<IFriendRequest[]>(data);
   const user = useUser();
@@ -31,7 +30,7 @@ const FriendRequestContainer = ({ data }: { data: IFriendRequest[] }) => {
     const channel = pusher.subscribe("friendRequest");
 
     channel.bind("new-friend-request", (data: IFriendRequest) => {
-      if (data.sender.id === user.user?.id) {
+      if (data.sender?.id === user.user?.id) {
         return;
       }
       setFriendRequestsData((prev) => [...prev, data]);
@@ -39,7 +38,7 @@ const FriendRequestContainer = ({ data }: { data: IFriendRequest[] }) => {
 
     channel.bind("deny-friend-request", (data: IFriendRequest) => {
       const newFriendRequestData = friendRequestsData.filter(
-        (element) => element.sender.id !== data.sender.id
+        (element) => element.sender?.id !== data.sender?.id
       );
       setFriendRequestsData(newFriendRequestData);
     });
@@ -99,10 +98,6 @@ const FriendRequestContainer = ({ data }: { data: IFriendRequest[] }) => {
             className="pl-[14px] md:pl-[22px] py-3 md:py-4 shadow-lg border-2 rounded-lg text-slate-500"
             type="text"
             {...register("email")}
-            onChange={(e) => {
-              console.log(e.currentTarget.value);
-              setEmail(e.currentTarget.value);
-            }}
             placeholder="you@example.com"
           />
           <button className="text-white hover:bg-green-600 bg-[#00b086] shadow-md rounded-lg text-center px-4 md:px-8 py-3 md:py-4">

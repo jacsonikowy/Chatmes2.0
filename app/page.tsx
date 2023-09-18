@@ -1,15 +1,13 @@
 "use client";
-// import Button from "@/components/Button";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/Button";
 import { Rocket } from "lucide-react";
 
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { userId } = useAuth();
   const router = useRouter();
-  const user = useUser();
 
   if (userId) {
     router.replace("/dashboard/messages");
@@ -25,9 +23,11 @@ export default function Home() {
           Best messaging app on the World Wide Web
         </p>
         <div className="mt-32">
-          <Button className="bg-[#00B086] hover:bg-green-800" href="/login">
-            Chat Now
-          </Button>
+          <Button
+            className="bg-[#00B086] hover:bg-green-800 transition ease-in text-white px-5 py-3 rounded-xl"
+            text="Chat Now"
+            href="/login"
+          />
         </div>
       </div>
       <div className="text-9xl hidden md:block">

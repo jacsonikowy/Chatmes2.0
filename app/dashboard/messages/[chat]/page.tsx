@@ -3,6 +3,8 @@ import Chat from "@/components/Chat";
 import { headers } from "next/headers";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 const page = async () => {
   const headersList = headers();
   const pathname = headersList.get("x-invoke-path") || "";

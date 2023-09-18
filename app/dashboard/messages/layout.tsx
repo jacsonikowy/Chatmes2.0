@@ -11,7 +11,6 @@ const page = async ({ children }: { children: React.ReactNode }) => {
   const user = await currentUser();
   const headersList = headers();
   const pathname = headersList.get("x-invoke-path") || "";
-  const chatId = pathname.split("/").slice(3).toString();
 
   const friends = await prisma.user.findMany({
     where: {
@@ -20,9 +19,6 @@ const page = async ({ children }: { children: React.ReactNode }) => {
       },
     },
   });
-
-  console.log("firends");
-  console.log(friends);
 
   return (
     <div className="w-full h-full flex">

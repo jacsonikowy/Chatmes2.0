@@ -14,9 +14,8 @@ const Page = async () => {
     },
   });
 
-  // console.log(data);
-
   return <FriendRequestContainer data={data} />;
 };
 
 export default Page;
+export const dynamic = "force-dynamic";

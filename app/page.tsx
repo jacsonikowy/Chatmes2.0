@@ -20,7 +20,7 @@ export default function Home() {
           Chatmes
         </h1>
         <p className="text-[#65B4A1] font-medium text-xl md:text-5xl mt-4 md:mt-14">
-          Best messaging app on the World Wide Web
+          Messaging app on the World Wide Web
         </p>
         <div className="mt-32">
           <Button
